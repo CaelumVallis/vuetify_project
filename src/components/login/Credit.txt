@@ -1,0 +1,2 @@
+The login pages are based on Fedorae Edu's work!
+Github links:https://github.com/edu-fedorae/vuetify-components 
