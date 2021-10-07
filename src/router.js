@@ -5,6 +5,8 @@ import Calendar from './views/SharedCalendar.vue'
 import Auth from './views/Login.vue'
 import Register from './views/Register.vue'
 import Profile from './views/ProfileContactCard.vue'
+import Groups from './views/Groups.vue'
+import EventDialog from './components/EventDialog.vue'
 
 Vue.use(Router)
 
@@ -30,6 +32,16 @@ export default new Router({
     path: '/profile',
     name: 'profile',
     component: Profile
+  },
+  {
+    path: '/groups',
+    name: 'groups',
+    component: Groups
+  },
+  {
+    path: '/eventDialog',
+    name: 'eventDialog',
+    component: EventDialog
   }
 
   ]

@@ -12,7 +12,7 @@
                 target="_blank"
               >
                 <v-img
-                  src="@/assets/logo.png"
+                  src="@/assets/logo.svg"
                   alt="Fedorae Education Log"
                   contain
                   height="200"

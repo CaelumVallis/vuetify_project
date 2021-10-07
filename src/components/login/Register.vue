@@ -6,7 +6,7 @@
           <v-col cols="12" sm="8" md="4" lg="4">
             <v-card elevation="0">
               <a href="https://edu-fedorae.netlify.app" name="Fedorae Education" title="Fedorae Education" target="_blank">
-                <v-img src="@/assets/logo.png" alt="Fedorae Education Log" contain height="200"></v-img>
+                <v-img src="@/assets/logo.svg" alt="Fedorae Education Log" contain height="200"></v-img>
               </a>
               <v-card-text>
                 <v-form>
