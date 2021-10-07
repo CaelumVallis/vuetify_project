@@ -2,9 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import Home from './views/Home.vue'
 import Calendar from './views/SharedCalendar.vue'
-import Auth from './views/Login.vue'
+import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Profile from './views/ProfileContactCard.vue'
+import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -14,7 +15,7 @@ export default new Router({
   routes: [{
     path: '/auth',
     name: 'auth',
-    component: Auth
+    component: Login
   },
   {
     path: '/calendar',
@@ -30,6 +31,11 @@ export default new Router({
     path: '/profile',
     name: 'profile',
     component: Profile
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: Home
   }
 
   ]

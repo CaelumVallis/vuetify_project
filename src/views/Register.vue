@@ -6,7 +6,7 @@
           <v-col cols="12" sm="8" md="4" lg="4">
             <v-card elevation="0">
               <a href="https://edu-fedorae.netlify.app" name="Fedorae Education" title="Fedorae Education" target="_blank">
-                <v-img src="@/assets/logo.png" alt="Fedorae Education Log" contain height="200"></v-img>
+                <v-img src="@/assets/logo.svg" alt="Fedorae Education Log" contain height="200"></v-img>
               </a>
               <v-card-text>
                 <v-form>
@@ -15,11 +15,12 @@
                   <v-text-field label="Enter your username" v-model.trim="username" name="username" prepend-inner-icon="mdi-account" type="text" class="rounded-0" outlined></v-text-field>
                   <v-text-field label="Enter your email" v-model.trim="email" name="email" prepend-inner-icon="mdi-email" type="email" class="rounded-0" outlined></v-text-field>
                   <v-text-field label="Enter your password" v-model.trim="password" name="password" prepend-inner-icon="mdi-lock" type="password" class="rounded-0" outlined></v-text-field>
-                  <v-btn class="rounded-0" v-on:click="Auth()"  color="#000000" x-large block dark>Register</v-btn>
+                  <v-btn class="rounded-0" @click="auth()"  color="#000000" x-large block dark>Register</v-btn>
                   <v-card-actions class="text--secondary">
                     <v-spacer></v-spacer>
-                    <!-- <router-link :to="{ name: 'SignUp' }">Sign Up</router-link> -->
-                    Already have an account? <router-link style="margin-right:30px" to="/auth">Log In</router-link>
+                    Already have an account? <router-link style="margin-right:30px" to="/auth">
+                      <a class="pl-2" style="color: #000000">Log in</a>
+                    </router-link>
                   </v-card-actions>
                 </v-form>
               </v-card-text>
@@ -50,8 +51,9 @@ export default {
     }
   },
   methods: {
-    Auth() {
-      Api.post('/register', { password: this.password, email: this.email, firstName: this.firstName, lastName: this.lastName, username: this.username })
+    auth() {
+      const creds = { password: this.password, email: this.email, firstName: this.firstName, lastName: this.lastName, username: this.username }
+      Api.post('/register', creds)
         .then(response => {
           console.log(response.data)
           if (response.data.status === 'success') {
@@ -65,6 +67,3 @@ export default {
   }
 }
 </script>
-
-<style lang="css" scoped>
-</style>
