@@ -122,6 +122,7 @@ export default {
     viewDay({ date }) {
       this.focus = date
       this.type = 'day'
+      this.$store.commit('setCurrentDate', this.focus)
     },
     getEventColor(event) {
       return event.color
@@ -131,9 +132,11 @@ export default {
     },
     prev() {
       this.$refs.calendar.prev()
+      this.$store.commit('setCurrentDate', this.focus)
     },
     next() {
       this.$refs.calendar.next()
+      this.$store.commit('setCurrentDate', this.focus)
     },
     showEvent({ nativeEvent, event }) {
       const open = () => {

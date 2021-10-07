@@ -3,7 +3,8 @@ import { events } from '@/store/urls.js'
 
 export default {
   state: {
-    events: []
+    events: [],
+    selectedDate: new Date()
   },
 
   getters: {
@@ -17,24 +18,20 @@ export default {
       axios.get(events).then(({ data }) => {
         this.commit('setEvents', data)
       })
+    },
+    deleteEvent(store, serverId) {
+      axios.delete(`${events}/${serverId}`).then(({ data: { id } }) => {
+        this.commit('setEvents', store.state.events.filter(item => item.id !== id))
+      })
     }
-    // syncWithStorage(store) {
-    //   localStorage.setItem('tasks', JSON.stringify(store.state.tasks))
-    // }
   },
 
   mutations: {
     setEvents(store, events) {
       store.events = events || []
+    },
+    setCurrentDate(store, date) {
+      store.selectedDate = new Date(date)
     }
-    // addTask(store, task) {
-    //   store.tasks.push(task)
-    // },
-    // editTask(store, task) {
-    //   store.tasks = store.tasks.map((item) => item.id === task.id ? task : item)
-    // },
-    // deleteTask(store, id) {
-    //   store.tasks = store.tasks.filter(item => item.id !== id)
-    // }
   }
 }
