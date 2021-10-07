@@ -46,13 +46,12 @@
           ref="calendar"
           v-model="focus"
           color="primary"
-          :events="events"
+          :events="calendarEvents"
           :event-color="getEventColor"
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
           @click:date="viewDay"
-          @change="updateRange"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
@@ -103,34 +102,27 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    events: [],
-    colors: [
-      'blue',
-      'indigo',
-      'deep-purple',
-      'cyan',
-      'green',
-      'orange',
-      'grey darken-1'
-    ],
-    names: [
-      'Meeting',
-      'Holiday',
-      'PTO',
-      'Travel',
-      'Event',
-      'Birthday',
-      'Conference',
-      'Party'
-    ]
+    calendarEvents: []
   }),
+  computed: {
+    events() {
+      return this.$store.getters.events
+    }
+  },
+  watch: {
+    events: function () {
+      this.calendarEvents = this.convertToVutifyCalendarEvent(this.events)
+    }
+  },
   mounted() {
     this.$refs.calendar.checkChange()
+    this.$store.dispatch('fetchEvents')
   },
   methods: {
     viewDay({ date }) {
       this.focus = date
       this.type = 'day'
+      this.$store.commit('setCurrentDate', this.focus)
     },
     getEventColor(event) {
       return event.color
@@ -140,9 +132,11 @@ export default {
     },
     prev() {
       this.$refs.calendar.prev()
+      this.$store.commit('setCurrentDate', this.focus)
     },
     next() {
       this.$refs.calendar.next()
+      this.$store.commit('setCurrentDate', this.focus)
     },
     showEvent({ nativeEvent, event }) {
       const open = () => {
@@ -160,31 +154,41 @@ export default {
       }
       nativeEvent.stopPropagation()
     },
-    updateRange({ start, end }) {
-      const events = []
-      const min = new Date(`${start.date}T00:00:00`)
-      const max = new Date(`${end.date}T23:59:59`)
-      const days = (max.getTime() - min.getTime()) / 86400000
-      const eventCount = this.rnd(days, days + 20)
-      for (let i = 0; i < eventCount; i++) {
-        const allDay = this.rnd(0, 3) === 0
-        const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-        const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-        const second = new Date(first.getTime() + secondTimestamp)
-        events.push({
-          name: this.names[this.rnd(0, this.names.length - 1)],
-          start: first,
-          end: second,
-          color: this.colors[this.rnd(0, this.colors.length - 1)],
-          timed: !allDay
-        })
-      }
-      this.events = events
-    },
-    rnd(a, b) {
-      return Math.floor((b - a + 1) * Math.random()) + a
+    convertToVutifyCalendarEvent(events) {
+      return events.map((item) => {
+        return {
+          ...item,
+          start: new Date(item.start),
+          end: new Date(item.end)
+        }
+      })
     }
+    // updateRange({ start, end }) {
+    //   const events = []
+    //   const min = new Date(`${start.date}T00:00:00`)
+    //   const max = new Date(`${end.date}T23:59:59`)
+    //   const days = (max.getTime() - min.getTime()) / 86400000
+    //   const eventCount = this.rnd(days, days + 20)
+    //   for (let i = 0; i < eventCount; i++) {
+    //     const allDay = this.rnd(0, 3) === 0
+    //     const firstTimestamp = this.rnd(min.getTime(), max.getTime())
+    //     const first = new Date(firstTimestamp - (firstTimestamp % 900000))
+    //     const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
+    //     const second = new Date(first.getTime() + secondTimestamp)
+    //     events.push({
+    //       name: this.names[this.rnd(0, this.names.length - 1)],
+    //       start: first,
+    //       end: second,
+    //       color: this.colors[this.rnd(0, this.colors.length - 1)],
+    //       timed: !allDay
+    //     })
+    //   }
+    //   this.events = events
+    //   console.log(events)
+    // },
+    // rnd(a, b) {
+    //   return Math.floor((b - a + 1) * Math.random()) + a
+    // }
   }
 }
 </script>

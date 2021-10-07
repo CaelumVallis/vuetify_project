@@ -1,23 +1,27 @@
 <template>
   <div>
-    <v-jumbotron
-      header="DIT341 Frontend"
-      lead="Welcome to your DIT341 Frontend Vue.js App"
-    >
-      <v-button class="btn_message" variant="primary" v-on:click="getMessage()"
-        >Get Message from Server</v-button
-      >
-      <p>
-        Message from the server:<br />
-        {{ message }}
-      </p>
-    </v-jumbotron>
+      <v-container>
+      <v-row>
+        <v-col cols='8'>
+          <v-card>
+            <SharedCalendar />
+          </v-card>
+        </v-col>
+        <v-col cols='4'>
+          <v-card>
+            <Events />
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
+import SharedCalendar from '@/views/SharedCalendar.vue'
+import Events from '@/components//events/Events.vue'
 
 export default {
   name: 'home',
@@ -26,6 +30,7 @@ export default {
       message: 'none'
     }
   },
+  components: { SharedCalendar, Events },
   methods: {
     getMessage() {
       Api.get('/')

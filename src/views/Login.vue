@@ -35,7 +35,6 @@
                     v-model.trim="password"
                     prepend-inner-icon="mdi-lock"
                     type="password"
-                    suffix="| Forgot?"
                     class="rounded-0"
                     outlined
                   ></v-text-field>
@@ -43,13 +42,9 @@
                     >Login</v-btn
                   >
                   <v-card-actions class="text--secondary">
-                    <v-checkbox
-                      color="#000000"
-                      label="Remember me"
-                    ></v-checkbox>
-                    <v-spacer></v-spacer>
-                    No account? <router-link style="margin-right:30px" to="/register">Sign Up</router-link>
-                    <!-- <a href="./Profile" class="pl-2" style="color: #000000">Sign Up</a> -->
+                    No account? <router-link style="margin-right:30px" to="/register">
+                      <a class="pl-2" style="color: #000000">Sign Up</a>
+                    </router-link>
                   </v-card-actions>
                 </v-form>
               </v-card-text>
@@ -89,7 +84,7 @@ export default {
           console.log(response.data)
           if (response.data.data.JWT) {
             localStorage.setItem('jwt', response.data.data.JWT)
-            this.$router.push({ name: 'calendar' })
+            this.$router.push({ name: 'home' })
           }
         })
         .catch(error => {
@@ -99,6 +94,3 @@ export default {
   }
 }
 </script>
-
-<style lang="css" scoped>
-</style>
