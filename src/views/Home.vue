@@ -1,18 +1,24 @@
 <template>
   <div>
-      <v-container>
-      <v-row>
-        <v-col cols='8'>
-          <v-card>
-            <SharedCalendar />
-          </v-card>
-        </v-col>
-        <v-col cols='4'>
-          <v-card>
-            <Events />
-          </v-card>
-        </v-col>
-      </v-row>
+      <v-container class="pt-12">
+        <v-row>
+          <v-col
+            md='8'
+            sm='12'
+          >
+            <v-card>
+              <SharedCalendar />
+            </v-card>
+          </v-col>
+          <v-col
+            md='4'
+            sm='12'
+          >
+            <v-card>
+              <Events />
+            </v-card>
+          </v-col>
+        </v-row>
     </v-container>
   </div>
 </template>

@@ -32,8 +32,7 @@ export default {
       })
     },
     currentDay() {
-      const currentDate = this.$store.state.calendarEvents.selectedDate
-      return currentDate ? currentDate.toDateString() : ''
+      return this.$store.state.calendarEvents.selectedDate.toDateString()
     }
   }
 }

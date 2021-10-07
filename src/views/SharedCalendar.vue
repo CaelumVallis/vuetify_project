@@ -49,7 +49,6 @@
           :events="calendarEvents"
           :event-color="getEventColor"
           :type="type"
-          @click:event="showEvent"
           @click:more="viewDay"
           @click:date="viewDay"
         ></v-calendar>
@@ -137,22 +136,6 @@ export default {
     next() {
       this.$refs.calendar.next()
       this.$store.commit('setCurrentDate', this.focus)
-    },
-    showEvent({ nativeEvent, event }) {
-      const open = () => {
-        this.selectedEvent = event
-        this.selectedElement = nativeEvent.target
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => (this.selectedOpen = true))
-        )
-      }
-      if (this.selectedOpen) {
-        this.selectedOpen = false
-        requestAnimationFrame(() => requestAnimationFrame(() => open()))
-      } else {
-        open()
-      }
-      nativeEvent.stopPropagation()
     },
     convertToVutifyCalendarEvent(events) {
       return events.map((item) => {

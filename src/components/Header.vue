@@ -1,6 +1,7 @@
 <template>
   <v-app-bar
     dense
+    fixed
   >
     <router-link style="margin-right:30px" to="/auth">Login</router-link>
     <router-link style="margin-right:30px" to="/register">Register</router-link>
