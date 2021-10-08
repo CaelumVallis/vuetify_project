@@ -19,7 +19,7 @@ export default {
       id: '_aaaaa',
       name: 'Lizy',
       memberSelected: false
-    }]
+    }],
     groups: ['Group 1', 'Group 2', 'Group 3', 'Group 4']
   },
   getters: {
@@ -53,6 +53,7 @@ export default {
       //     this.message = error
       //   })
       // })
+    },
     createEvent(store, event) {
       axios.post(events, event).then(({ data }) => {
         this.commit('setEvents', [...store.state.events, data])
@@ -76,6 +77,7 @@ export default {
     },
     setUsers(store, users) {
       store.users = users
+    },
     setGroups(store, groups) {
       store.groups = groups
     }
