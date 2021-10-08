@@ -26,9 +26,6 @@ export default {
       return this.event.invited.join(', ')
     }
   },
-  created() {
-    console.log(this.event)
-  },
   methods: {
     deleteEvent() {
       this.$store.dispatch('deleteEvent', this.event.serverId)

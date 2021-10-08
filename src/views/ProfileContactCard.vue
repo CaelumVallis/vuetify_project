@@ -17,12 +17,10 @@
                   <v-avatar size="100">
                     <img
                         alt="user"
-                        src="http://www.reptilepage.com/assets/images/nophoto-female.jpg"
+                        src="https://picsum.photos/200"
                     >
                   </v-avatar>
-
                   <v-spacer></v-spacer>
-
                   <v-menu offset-y left>
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn
@@ -42,20 +40,16 @@
                   </v-menu>
 
                 </v-app-bar>
-
                 <v-card-title class="white--text mt-8">
                   <p class="ml-3">
                     {{firstName +' '+ lastName}}
                   </p>
                 </v-card-title>
               </v-img>
-
               <v-card-text>
-
                 <div class="font-weight-bold ml-8 mb-2">
                   User Profile
                 </div>
-
                 <v-list two-line>
                   <v-list-item href="#">
                     <v-list-item-icon>
@@ -71,46 +65,37 @@
                       <v-icon>mdi-message-text</v-icon>
                     </v-list-item-icon> -->
                   </v-list-item>
-
                   <v-divider inset></v-divider>
-
                   <v-list-item href="#">
                     <v-list-item-icon>
                       <v-icon color="indigo">
                         mdi-email
                       </v-icon>
                     </v-list-item-icon>
-
                     <v-list-item-content>
                       <v-list-item-title>{{ email }}</v-list-item-title>
                     </v-list-item-content>
-
                     <!-- <v-list-item-icon>
                       <v-icon>mdi-message-text</v-icon>
                     </v-list-item-icon> -->
                   </v-list-item>
-
                   <v-divider inset></v-divider>
-
                   <v-list-item href="#">
                     <v-list-item-icon>
                       <v-icon color="indigo">
                         mdi-account
                       </v-icon>
                     </v-list-item-icon>
-
                     <v-list-item-content>
                       <v-list-item-title>{{ username }}</v-list-item-title>
                     </v-list-item-content>
-
                     <!-- <v-list-item-icon>
                       <v-icon>mdi-message-text</v-icon>
                     </v-list-item-icon> -->
                   </v-list-item>
-                  <v-btn v-on:click="Delete()" class="rounded-0" color="#000000" x-large block dark
+                  <v-btn v-on:click="deleteUser" class="rounded-0" color="#000000" x-large block dark
                     >Delete account</v-btn
                   >
-
                   <!-- <v-list-item href="#">
                     <v-list-item-icon>
                       <v-icon color="indigo">
@@ -163,7 +148,7 @@ export default {
           this.message = error
         })
     },
-    Delete() {
+    deleteUser() {
       Api.delete('/deleteUser', { authorization: this.jwt })
         .then(response => {
           this.$router.push({ name: 'auth' })

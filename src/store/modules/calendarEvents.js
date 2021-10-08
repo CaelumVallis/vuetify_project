@@ -1,10 +1,12 @@
 import axios from 'axios'
+// import { Api } from '@/Api'
 import { events } from '@/store/urls.js'
 
 export default {
   state: {
     events: [],
     selectedDate: new Date(),
+
     users: [{
       id: '_drjg2t3',
       name: 'Allan',
@@ -18,14 +20,13 @@ export default {
       name: 'Lizy',
       memberSelected: false
     }]
+    groups: ['Group 1', 'Group 2', 'Group 3', 'Group 4']
   },
-
   getters: {
     events(store) {
       return store.events
     }
   },
-
   actions: {
     fetchEvents() {
       axios.get(events).then(({ data }) => {
@@ -52,6 +53,17 @@ export default {
       //     this.message = error
       //   })
       // })
+    createEvent(store, event) {
+      axios.post(events, event).then(({ data }) => {
+        this.commit('setEvents', [...store.state.events, data])
+      })
+    },
+    fetchGroups() {
+      // Api.post('/getGroups').then(res => {
+      //   this.commit('setGroups', res)
+      // }).catch(error => {
+      //   this.message = error
+      // })
     }
   },
 
@@ -64,6 +76,8 @@ export default {
     },
     setUsers(store, users) {
       store.users = users
+    setGroups(store, groups) {
+      store.groups = groups
     }
   }
 }

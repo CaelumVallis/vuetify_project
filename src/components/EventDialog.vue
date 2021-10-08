@@ -1,5 +1,4 @@
 <template>
-  <v-app>
     <v-container>
       <v-dialog
         v-model="dialog"
@@ -7,10 +6,10 @@
       >
         <template v-slot:activator="{ on }">
           <v-btn
-            color="red lighten-2"
+            color="yellow darken-2"
             dark
             v-on="on">
-            Click Me
+            Create an event
           </v-btn>
         </template>
         <v-card class="pa-8 d-flex">
@@ -22,7 +21,7 @@
               dense></v-text-field>
             <div
               class="event-dialog-date font-weight-bold align-self-start">{{ currentDate }}</div>
-              <div class="event-dialog-time-picker d-flex ">
+              <div class="event-dialog-time-picker d-flex">
                 <div align-self="start" class="time-picker-start time-picker-scale mt-3" style="width: 350px;">
                   <h2 align="start">From:</h2>
                   <v-time-picker
@@ -41,7 +40,7 @@
             <v-row>
               <v-col cols="4" class="pa-0 pl-0">
                 <v-select
-                  v-model="eventInfo.pickedGroup"
+                  v-model="eventInfo.group"
                   :items="groups"
                   :menu-props="{ maxHeight: '400' }"
                   label="Group"
@@ -52,7 +51,7 @@
             <v-row>
               <v-col cols="6" class="pa-0 pl-0">
                 <v-select
-                  v-model="eventInfo.invitedPersons"
+                  v-model="eventInfo.invited"
                   :items="persons"
                   :menu-props="{ maxHeight: '400' }"
                   label="Invites"
@@ -78,7 +77,7 @@
               ></v-date-picker>
             </v-row>
             <v-btn
-              v-on:click="closeDialog(); formatDate()"
+              v-on:click="onCreate"
               class="align-self-end mr-3 mb-5"
               depressed
               color="primary"
@@ -89,12 +88,19 @@
         </v-card>
       </v-dialog>
     </v-container>
-  </v-app>
 </template>
 
 <script>
 export default {
   name: 'eventDialog',
+  created() {
+    this.$store.dispatch('fetchGroups')
+  },
+  computed: {
+    groups() {
+      return this.$store.state.calendarEvents.groups
+    }
+  },
   data() {
     return {
       dialog: false,
@@ -102,20 +108,25 @@ export default {
         name: null,
         start: null,
         end: null,
-        pickedGroup: null,
-        invitedPersons: [],
+        group: null,
+        invited: [],
         description: null
       },
       currentDate: `${(new Date()).getDate()}.${(new Date()).getMonth() + 1}.${(new Date()).getFullYear()}`,
       initialDatePicker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      groups: [],
       persons: []
     }
   },
   methods: {
-    formatDate() {
-      this.eventInfo.start = new Date(`${this.picker}T${this.start}:00`)
-      this.eventInfo.end = new Date(`${this.picker}T${this.end}:00`)
+    onCreate() {
+      this.closeDialog()
+      const event = {
+        ...this.eventInfo,
+        start: `${this.initialDatePicker}T${this.eventInfo.start}:00`,
+        end: `${this.initialDatePicker}T${this.eventInfo.end}:00`,
+        color: 'blue'
+      }
+      this.$emit('create', event)
     },
     closeDialog() {
       this.dialog = false
@@ -141,9 +152,5 @@ export default {
 .time-picker-scale {
   transform: scale(0.7);
   transform-origin: top left;
-}
-
->>>.v-time-picker-title {
-  justify-content: center;
 }
 </style>

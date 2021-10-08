@@ -7,23 +7,16 @@
         :event="event"
         class="mb-4"
       />
-    <v-btn
-      class='ma-4'
-      color='yellow darken-2'
-    >
-      Create an event
-    </v-btn>
+      <EventDialog @create="createEvent"/>
   </v-card>
 </template>
 
 <script>
 import Event from './Event.vue'
+import EventDialog from '@/components/EventDialog.vue'
 
 export default {
-  components: { Event },
-  created() {
-    console.log(this.$store.state.calendarEvents.selectedDate)
-  },
+  components: { Event, EventDialog },
   computed: {
     currentDateEvents() {
       return this.$store.getters.events.filter((item) => {
@@ -34,6 +27,11 @@ export default {
     },
     currentDay() {
       return this.$store.state.calendarEvents.selectedDate.toDateString()
+    }
+  },
+  methods: {
+    createEvent(data) {
+      this.$store.dispatch('createEvent', data)
     }
   }
 }

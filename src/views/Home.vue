@@ -1,6 +1,5 @@
 <template>
-  <div>
-      <v-container class="pt-12">
+      <v-container>
         <v-row>
           <v-col
             md='8'
@@ -20,7 +19,6 @@
           </v-col>
         </v-row>
     </v-container>
-  </div>
 </template>
 
 <script>
