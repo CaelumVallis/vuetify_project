@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Api } from '@/Api'
+// import { Api } from '@/Api'
 import { events } from '@/store/urls.js'
 
 export default {
@@ -30,12 +30,11 @@ export default {
       })
     },
     fetchGroups() {
-      // здесь пока 401 forbidden, надо понять как авторизироваться
-      Api.post('/getUsers').then(res => {
-        this.commit('setGroups', res)
-      }).catch(error => {
-        this.message = error
-      })
+      // Api.post('/getGroups').then(res => {
+      //   this.commit('setGroups', res)
+      // }).catch(error => {
+      //   this.message = error
+      // })
     }
   },
 

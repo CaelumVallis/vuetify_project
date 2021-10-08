@@ -21,7 +21,7 @@
               dense></v-text-field>
             <div
               class="event-dialog-date font-weight-bold align-self-start">{{ currentDate }}</div>
-              <div class="event-dialog-time-picker d-flex ">
+              <div class="event-dialog-time-picker d-flex">
                 <div align-self="start" class="time-picker-start time-picker-scale mt-3" style="width: 350px;">
                   <h2 align="start">From:</h2>
                   <v-time-picker
@@ -152,9 +152,5 @@ export default {
 .time-picker-scale {
   transform: scale(0.7);
   transform-origin: top left;
-}
-
->>>.v-time-picker-title {
-  justify-content: center;
 }
 </style>
