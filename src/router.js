@@ -5,6 +5,7 @@ import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Profile from './views/ProfileContactCard.vue'
 import Groups from './views/Groups.vue'
+import Group from './views/Group.vue'
 import EventDialog from './components/EventDialog.vue'
 import Home from './views/Home.vue'
 
