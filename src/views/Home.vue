@@ -7,7 +7,7 @@
             sm='12'
           >
             <v-card>
-              <SharedCalendar />
+              <SharedCalendar height=600 />
             </v-card>
           </v-col>
           <v-col

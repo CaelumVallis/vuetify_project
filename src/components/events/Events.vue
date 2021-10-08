@@ -27,8 +27,9 @@ export default {
   computed: {
     currentDateEvents() {
       return this.$store.getters.events.filter((item) => {
-        return new Date(item.start) <= this.$store.state.calendarEvents.selectedDate &&
-        this.$store.state.calendarEvents.selectedDate <= new Date(item.end)
+        return new Date(item.start).toDateString() === this.$store.state.calendarEvents.selectedDate.toDateString()
+        // return new Date(item.start) <= this.$store.state.calendarEvents.selectedDate &&
+        // this.$store.state.calendarEvents.selectedDate <= new Date(item.end)
       })
     },
     currentDay() {
