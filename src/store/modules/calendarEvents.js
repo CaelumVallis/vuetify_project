@@ -1,18 +1,18 @@
 import axios from 'axios'
+import { Api } from '@/Api'
 import { events } from '@/store/urls.js'
 
 export default {
   state: {
     events: [],
-    selectedDate: new Date()
+    selectedDate: new Date(),
+    groups: ['Group 1', 'Group 2', 'Group 3', 'Group 4']
   },
-
   getters: {
     events(store) {
       return store.events
     }
   },
-
   actions: {
     fetchEvents() {
       axios.get(events).then(({ data }) => {
@@ -23,6 +23,19 @@ export default {
       axios.delete(`${events}/${serverId}`).then(({ data: { id } }) => {
         this.commit('setEvents', store.state.events.filter(item => item.id !== id))
       })
+    },
+    createEvent(store, event) {
+      axios.post(events, event).then(({ data }) => {
+        this.commit('setEvents', [...store.state.events, data])
+      })
+    },
+    fetchGroups() {
+      // здесь пока 401 forbidden, надо понять как авторизироваться
+      Api.post('/getUsers').then(res => {
+        this.commit('setGroups', res)
+      }).catch(error => {
+        this.message = error
+      })
     }
   },
 
@@ -32,6 +45,9 @@ export default {
     },
     setCurrentDate(store, date) {
       store.selectedDate = new Date(date)
+    },
+    setGroups(store, groups) {
+      store.groups = groups
     }
   }
 }

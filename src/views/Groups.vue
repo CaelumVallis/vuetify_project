@@ -1,48 +1,73 @@
 <template>
-  <v-app>
-    <v-container>
-      <v-row>
-        <v-col class="d-flex align-center flex-column">
-          <a href="#">
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-card>
             <v-img
-            src="../assets/img/work.jpg" width="550"></v-img>
-          </a>
-          <h2>Work</h2>
-        </v-col>
-        <v-col class="d-flex align-center flex-column">
-          <a href="#">
+              @click="createNewGroup"
+              contain
+              src="../assets/img/createnew.png"
+            ></v-img>
+            <v-card-title>
+              Create New
+            </v-card-title>
+        </v-card>
+      </v-col>
+      <v-col>
+        <v-card>
             <v-img
-            src="../assets/img/family.jpg" width="550"></v-img>
-          </a>
-          <h2>Family</h2>
-        </v-col>
-      </v-row>
-      <v-row class="justify-center">
-        <v-col class="d-flex align-center flex-column">
-          <a href="#">
+              @click="navigateToGroup('family')"
+              contain
+              src="../assets/img/family.jpg"
+            ></v-img>
+            <v-card-title>
+              Family
+            </v-card-title>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-card>
             <v-img
-            src="../assets/img/football.jpg" width="550"></v-img>
-          </a>
-          <h2>Football</h2>
-        </v-col>
-        <v-col class="d-flex align-center flex-column">
-          <a href="#">
+              @click="navigateToGroup('football')"
+              contain
+              src="../assets/img/football.jpg"
+            ></v-img>
+            <v-card-title>
+              Football
+            </v-card-title>
+        </v-card>
+      </v-col>
+      <v-col>
+          <v-card>
             <v-img
-            src="../assets/img/createnew.png" width="400"></v-img>
-          </a>
-          <h2>Create New</h2>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-app>
+              @click="navigateToGroup('work')"
+              contain
+              src="../assets/img/work.jpg"
+            ></v-img>
+            <v-card-title>
+              Work
+            </v-card-title>
+          </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+export default {
+  methods: {
+    navigateToGroup(groupName) {
+      this.$router.push(`/userGroups/${groupName}`)
+    },
+    createNewGroup() {
 
+    }
+  }
+}
 </script>
 
 <style scoped>
-v-img {
-  text-align:center;
-}
+
 </style>

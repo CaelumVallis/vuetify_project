@@ -4,7 +4,7 @@
       <div id='nav'>
         <Header />
       </div>
-      <div class='pa-4'>
+      <div class='pa-4 pt-12'>
         <router-view />
       </div>
     </v-app>
